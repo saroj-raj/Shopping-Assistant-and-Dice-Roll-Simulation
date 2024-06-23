@@ -1,0 +1,94 @@
+
+
+    # Function for a shopping assistant program
+    def shopping_assistant():
+        shopping_list = []  # List to store the items
+        total_cost = 0  # Variable to keep track of the total cost
+        budget = float(input("Enter your budget: "))  # Ask the user for their budget
+
+        # Loop to gather the items, prices, and quantities
+        while True:
+            item = input("Enter the item name (or 'done' when finished): ")
+
+            # Check if the user is finished entering items
+            if item.lower() == 'done':
+                break
+
+            price = float(input(f"Enter the price for {item}: "))
+            quantity = int(input(f"Enter the quantity for {item}: "))
+
+            # Add the item to the shopping list
+            shopping_list.append((item, price, quantity))
+
+            # Calculate the total cost
+            total_cost += price * quantity
+
+            # Suggest healthier options
+            if 'juice' in item.lower():
+                print(f"Consider replacing {item} with fresh fruit for a healthier choice.")
+
+        # Compare the total cost with the budget and provide feedback
+        print("\nShopping Summary:")
+        for item, price, quantity in shopping_list:
+            print(f"{quantity} x {item} at ${price:.2f} each: ${price * quantity:.2f}")
+
+        print(f"Total cost: ${total_cost:.2f}")
+        if total_cost > budget:
+            print(f"You are over your budget by ${total_cost - budget:.2f}.")
+            print("You may want to remove some items or find cheaper alternatives.")
+        else:
+            print(f"You are within your budget. You have ${budget - total_cost:.2f} left.")
+
+    # Call the function to start the program
+    shopping_assistant()
+
+    Enter your budget: 20
+    Enter the item name (or 'done' when finished): apple 
+    Enter the price for apple : 3
+    Enter the quantity for apple : 4
+    Enter the item name (or 'done' when finished): orange
+    Enter the price for orange: 2
+    Enter the quantity for orange: 3
+    Enter the item name (or 'done' when finished): done
+
+    Shopping Summary:
+    4 x apple  at $3.00 each: $12.00
+    3 x orange at $2.00 each: $6.00
+    Total cost: $18.00
+    You are within your budget. You have $2.00 left.
+
+    import random
+
+    def roll_dice(n):
+        """Roll a dice n times and record the results."""
+        results = [random.randint(1, 6) for _ in range(n)]
+        return results
+
+    def count_occurrences(dice_results):
+        """Count the occurrences of each face in the dice results."""
+        face_counts = {face: dice_results.count(face) for face in range(1, 7)}
+        return face_counts
+
+    def calculate_probabilities(face_counts, n):
+        """Calculate the probability of each face based on the occurrences."""
+        probabilities = {face: count / n for face, count in face_counts.items()}
+        return probabilities
+
+    # Simulate rolling a dice for a large number of times
+    n = 10000  # Number of dice rolls
+    dice_results = roll_dice(n)  # Roll the dice n times
+
+    # Count how many times each face appears
+    face_counts = count_occurrences(dice_results)
+
+    # Calculate the probability for each face
+    probabilities = calculate_probabilities(face_counts, n)
+
+    # Output the results
+    print(f"Number of rolls: {n}")
+    print("Face counts:", face_counts)
+    print("Probabilities:", probabilities)
+
+    Number of rolls: 10000
+    Face counts: {1: 1646, 2: 1701, 3: 1714, 4: 1690, 5: 1615, 6: 1634}
+    Probabilities: {1: 0.1646, 2: 0.1701, 3: 0.1714, 4: 0.169, 5: 0.1615, 6: 0.1634}
